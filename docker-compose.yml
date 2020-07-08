@@ -83,6 +83,23 @@ services:
     entrypoint: ['npm'] # defines the command that is run when docker-compose up is run
     networks: 
       - laravel
+  
+  artisan:
+    # artisan is built from the local laravel files unlike the others that are built with images
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: artisan
+    volumes: 
+      - ./src:/var/www/html
+    # for migrations to work properly, mysql needs to be installed hence the depends_on
+    depends_on: 
+      - mysql
+    working_dir: /var/www/html
+    # artisan is local to the laravel package hence setting the entry point to the application directory
+    entrypoint: ['/var/www/html/artisan']
+    networks: 
+      - laravel
 
 
 

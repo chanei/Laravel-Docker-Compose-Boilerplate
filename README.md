@@ -33,3 +33,8 @@ DB_PASSWORD=secret
 - To package npm with laravel's webpack mix, run ```docker-compose run --rm npm run dev``` to get compiled assets
 - Just like composer, to run npm commands on building the docker containers, define the commands in the ```Dockerfile```.
 - i.e. add ```RUN npm install``` and ```RUN npm run build``` to the Dockerfile
+
+## Using artisan
+- Inorder to run the artisan commands from the root directory, need to add an artisan service and container
+- with the ```artisan``` serve, you can run ```docker-compose run --rm artisan migrate``` instead of the legacy way of running ```docker-compose exec php php /var/www/html/artisan migrate``` 
+- <b>Note</b>Make sure the mysql connection settings in the ```.env``` file are set properly as defined above.
