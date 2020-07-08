@@ -62,4 +62,16 @@ services:
     networks:
       - laravel
 
+  # add the composer service to properly run composer commands
+  composer:
+    # download images from docker hub
+    image: composer:latest
+    container_name: composer
+    volumes: 
+      - ./src:/var/www/html
+    # specify where the working application files are going to be
+    working_dir: /var/www/html
+    networks: 
+      - laravel
+
 

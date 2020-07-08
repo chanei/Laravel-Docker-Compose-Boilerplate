@@ -19,3 +19,10 @@ DB_PASSWORD=secret
 </code></pre>
 
 - To power down our containers, ```docker-compose down```
+
+## Using composer
+- To view composer docker service, check ```docker-compose.yml``` file
+- In the root directory, to bring up the composer container and then down after the task is completed, run ```docker-compose run --rm composer require package_name``` 
+- ```rm``` flag tells docker to bring down the container when task is complete
+- To execute composer commands on build, define the run commands in the ```Dockerfile```
+
