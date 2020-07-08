@@ -74,4 +74,16 @@ services:
     networks: 
       - laravel
 
+  npm:
+    image: node:13.7
+    container_name: npm
+    volumes: 
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    entrypoint: ['npm'] # defines the command that is run when docker-compose up is run
+    networks: 
+      - laravel
+
+
+
 

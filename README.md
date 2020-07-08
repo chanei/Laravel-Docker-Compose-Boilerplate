@@ -1,4 +1,4 @@
-### Laravel 7 files with docker containerisation
+## Laravel 7 files with docker containerisation
 
 - the laravel application is set in the ```src``` folder
 - the ```nginx``` folder and the ```mysql``` folder are configuration folders as defined in the ```docker-compose.yml``` file
@@ -25,4 +25,11 @@ DB_PASSWORD=secret
 - In the root directory, to bring up the composer container and then down after the task is completed, run ```docker-compose run --rm composer require package_name``` 
 - ```rm``` flag tells docker to bring down the container when task is complete
 - To execute composer commands on build, define the run commands in the ```Dockerfile```
+- i.e. add ```RUN composer install``` to the Dockerfile
 
+## Using npm
+- To run node or npm commands without installing them locally, use the npm service in the ```docker-compose.yml``` file
+- in the root directory run ```docker-compose run --rm npm install``` to download the necessary dependencies
+- To package npm with laravel's webpack mix, run ```docker-compose run --rm npm run dev``` to get compiled assets
+- Just like composer, to run npm commands on building the docker containers, define the commands in the ```Dockerfile```.
+- i.e. add ```RUN npm install``` and ```RUN npm run build``` to the Dockerfile
