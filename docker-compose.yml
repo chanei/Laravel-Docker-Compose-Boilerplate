@@ -1,0 +1,65 @@
+version: '3'
+
+networks:
+  laravel:
+
+services:
+  nginx:
+    # download image from docker hub
+    image: nginx:stable-alpine
+    # our container name
+    container_name: nginx
+    # bind the computers' 8088 port to the nginx container's port 80
+    ports:
+      - "8088:80"
+    # volumes are sim links from the local machine to a particular place inside the container
+    # here, i created a folder src which will store my docker configs
+    volumes:
+      - ./src:/var/www/html
+      # create a local nginx config file in the nginx directory
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+
+    # run these services first before nginx
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - laravel
+
+  mysql:
+    image: mysql:5.7.30
+    container_name: mysql
+    restart: unless-stopped
+    # tty is set to true incase we need to access the mysql container using the shell interface
+    tty: true
+    ports: 
+      - "3306:3306"
+    # adding volumes to mysql container is required if you need to keep your data incase a container is stopped
+    # this volume is linked to the mysql directory in this root directory
+    volumes: 
+      - ./mysql:/var/lib/mysql
+    environment: 
+      MYSQL_DATABASE: homestead
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD:  secret
+      MYSQL_ROOT_PASSWORD: secret
+      SERVICE_NAME: mysql
+      SERVICE_TAGS: dev
+    networks:
+      - laravel
+
+  php:
+    # laravel requires a pdo extension which needs to be installed which is not intalled automatically in the container
+    # we are going to build the image locally from the Docker file
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: php
+    volumes: 
+      - ./src:/var/www/html
+    ports: 
+      - "9000:9000"
+    networks:
+      - laravel
+
+
