@@ -50,3 +50,26 @@ composer:
 - Inorder to run the artisan commands from the root directory, need to add an artisan service and container
 - with the ```artisan``` serve, you can run ```docker-compose run --rm artisan migrate``` instead of the legacy way of running ```docker-compose exec php php /var/www/html/artisan migrate``` 
 - <b>Note</b>Make sure the mysql connection settings in the ```.env``` file are set properly as defined above.
+
+## Useful Docker Commands
+
+- ```docker``` - shows all the docker commands
+- ```docker version``` - shows docker related versions
+- ```docker info``` - shows information about number of containers running and images
+- ```docker ps``` or ```docker container ls``` - shows list of containers
+- ```docker container ls -a``` - shows list of running containers
+- ```docker container rm container_id``` - removes a container (replace container_id with the actual container id)
+- ```docker images``` - shows available created images
+- ```docker image rm image_id``` - removes a docker image of specified image_id
+- ```docker rm $(docker ps -aq) -f``` - removes all containers where the ```-f``` flag forces to remove even the running containers
+- ```docker image build -t docker_hub_username/your_image_name``` - send your image to dockerhub account
+- ```docker push docker_hub_username/your_image_name```
+- ```docker login``` - authentication
+
+<p>To view the full list of docker commands, Check the 
+<a href="https://docs.docker.com/">Docker documentation</a></p>
+
+### Using docker compose
+- ```docker-compose up``` - build and run
+- ```docker-compose up -d``` - build and runs in the background
+- ```docker-compose down``` - stops running images and containers
