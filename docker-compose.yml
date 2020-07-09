@@ -97,7 +97,7 @@ services:
       - mysql
     working_dir: /var/www/html
     # artisan is local to the laravel package hence setting the entry point to the application directory
-    entrypoint: ['/var/www/html/artisan']
+    entrypoint: ['php', '/var/www/html/artisan']
     networks: 
       - laravel
 
