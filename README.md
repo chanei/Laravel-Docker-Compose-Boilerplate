@@ -26,6 +26,18 @@ DB_PASSWORD=secret
 - ```rm``` flag tells docker to bring down the container when task is complete
 - To execute composer commands on build, define the run commands in the ```Dockerfile```
 - i.e. add ```RUN composer install``` to the Dockerfile
+- OR update the ```composer.json``` file in the src directory and then update ```docker-compose.yml``` file to:
+<pre><code>
+composer:
+    image: composer:latest
+    container_name: composer
+    volumes: 
+        - ./src:/var/www/html
+    working_dir: /var/www/html
+    command: install
+    networks: 
+        - laravel
+</code></pre>
 
 ## Using npm
 - To run node or npm commands without installing them locally, use the npm service in the ```docker-compose.yml``` file
