@@ -62,6 +62,7 @@ composer:
 - ```docker images``` - shows available created images
 - ```docker image rm image_id``` - removes a docker image of specified image_id
 - ```docker rm $(docker ps -aq) -f``` - removes all containers where the ```-f``` flag forces to remove even the running containers
+- ```- docker rmi -f $(docker images -a -q)``` - removes all images
 - ```docker image build -t docker_hub_username/your_image_name``` - send your image to dockerhub account
 - ```docker push docker_hub_username/your_image_name```
 - ```docker login``` - authentication
